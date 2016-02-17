@@ -10,27 +10,32 @@ jQuery(document).ready(function($) {
         $hireable.html(hireableVal);
     });
 
-//"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
+    // game of life
+    var $game = $('#game');
+    $game.gameOfLife({
+        transparent: false,
+        cellSize: 5,
+        speed: 300
+    });
+
+    var game = $game.data("gameOfLife");
+    game.randomize();
+    game.toggle();
 
     // background
+    //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
     var pattern = Trianglify({
         width: window.innerWidth,
         height: window.innerHeight,
-
-
-        //cell_size: 60,
+        cell_size: 90,
         variance: 1,
-        //x_colors: ["#31a354","#addd8e","#f7fcb9","#addd8e","#31a354"],
-        x_colors: 'PRGn',
+        x_colors: 'Spectral',
         y_colors: 'match_x',
-        //y_colors: ["#31a354","#addd8e","#f7fcb9"],
         //palette: Trianglify.colorbrewer,
         //color_space: 'lab',
         //color_function: false,
         stroke_width: 1.51,
-        //width: $header.width(),
-        //height: $header.height(),
-        //seed: '52a300'
+        seed: '52a300'
     });
 
     var background = pattern.canvas();
