@@ -1,1 +1,1 @@
-jQuery(document).ready(function(e){var r=e("#repo-count"),t=e("#hireable");e.get("https://api.github.com/users/eschmar",function(e){r.html(e.public_repos);var o="No";1==e.hireable&&(o="Yes"),t.html(o)})});
+jQuery(document).ready(function(i){var e=i("#repo-count"),n=i("#hireable");i.get("https://api.github.com/users/eschmar",function(i){e.html(i.public_repos);var t="No";1==i.hireable&&(t="Yes"),n.html(t)});var t=Trianglify({width:window.innerWidth,height:window.innerHeight}),r=t.canvas();r.id="trianglify",document.body.appendChild(r)});

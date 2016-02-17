@@ -16,9 +16,11 @@ $cd-light: #f7fcb9;
 // GENERAL
 //
 
-body {
-    //background-color: #F0F0F0;
-    //background-color: #2196F3;       
+#trianglify {
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: -1;
 }
 
 #marcel {
@@ -84,7 +86,8 @@ body {
 
 @media (min-width: 768px) {
     body {
-        background-color: #2196F3;       
+        background-color: #F0F0F0;
+        //background-color: #2196F3;        
     }
 
     #marcel {
