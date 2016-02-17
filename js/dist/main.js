@@ -1,0 +1,1 @@
+jQuery(document).ready(function(e){var r=e("#repo-count"),t=e("#hireable");e.get("https://api.github.com/users/eschmar",function(e){r.html(e.public_repos);var o="No";1==e.hireable&&(o="Yes"),t.html(o)})});
