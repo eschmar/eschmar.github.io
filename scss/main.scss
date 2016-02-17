@@ -1,0 +1,22 @@
+body {
+    background-color: #F0F0F0;
+       
+}
+
+#marcel {
+    background-color: white;
+    max-width: 560px;
+    margin-top: 48px;
+    border-radius: 5px;
+
+    .game-of-life .col-xs-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .person {
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #fafafa;
+    }
+}
