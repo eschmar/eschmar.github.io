@@ -1,14 +1,29 @@
+//
+// HELPERS
+//
+
+@import "mixins";
+
+//
+// COLORS
+//
+
+$cd-primary: #31a354;
+$cd-secondary: #addd8e;
+$cd-light: #f7fcb9;
+
+//
+// GENERAL
+//
+
 body {
-    background-color: #F0F0F0;
-    background-color: #2196F3;
-       
+    //background-color: #F0F0F0;
+    //background-color: #2196F3;       
 }
 
 #marcel {
     background-color: white;
     max-width: 560px;
-    margin-top: 48px;
-    border-radius: 5px;
 
     #portrait {
         display: block;
@@ -19,7 +34,7 @@ body {
 
         img {
             max-width: 180px;
-            border-radius: 50%;
+            @include border-radius(50%);
         }
     }
 
@@ -60,5 +75,21 @@ body {
             line-height: 1.6;
             text-transform: none;
         }
+
+        &.stats-email {
+            border-bottom: 1px solid #e5e5e5;
+        }
     }
 }
+
+@media (min-width: 768px) {
+    body {
+        background-color: #2196F3;       
+    }
+
+    #marcel {
+        margin-top: 48px;
+        @include border-radius(5px);
+    }
+}
+
