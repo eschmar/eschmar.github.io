@@ -1,9 +1,11 @@
 jQuery(document).ready(function($) {
     var $repoCount = $('#repo-count');
     var $hireable = $('#hireable');
+    var $location = $('#location')
 
     $.get("https://api.github.com/users/eschmar", function(data) {
         $repoCount.html(data.public_repos);
+        $location.html(data.location.replace(', Sweden', ''));
 
         var hireableVal = "No";
         if (data.hireable == true) { hireableVal = "Yes"}
@@ -12,10 +14,6 @@ jQuery(document).ready(function($) {
 
     // background
     //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
-
-
-
-
     var pattern = Trianglify({
         width: window.innerWidth,
         height: window.innerHeight,
