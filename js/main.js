@@ -19,13 +19,11 @@ jQuery(document).ready(function($) {
         if (width >= 768) {
             $('#trianglify').remove();
 
-            //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
             var pattern = Trianglify({
                 width: window.innerWidth,
                 height: window.innerHeight,
                 cell_size: 90,
                 variance: 1,
-                //x_colors: ["#A7A7A7", "#FFFFFF", "#D3D3D3", "#7B7B7B"],
                 x_colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB"],
                 y_colors: 'match_x',
                 //palette: Trianglify.colorbrewer,
