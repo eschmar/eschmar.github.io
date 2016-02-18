@@ -52,7 +52,7 @@ $game.gameOfLife({
     transparent: false,
     cellSize: 5,
     speed: 100,
-    colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB"]
+    colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB", "#FFDD00"]
 });
 
 
