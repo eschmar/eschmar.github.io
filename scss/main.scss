@@ -62,6 +62,13 @@ body {
         border-bottom: 1px solid #e5e5e5;
         background-color: #fafafa;
         text-align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 300;
+
+        h1 {
+            font-family: 'Source Sans Pro', serif;
+            font-weight: 700;
+        }
     }
 
     .stats {
@@ -98,6 +105,8 @@ body {
     #marcel {
         margin-top: 48px;
         @include border-radius(5px);
+
+        .person p { padding: 0 24px; }
     }
 }
 
