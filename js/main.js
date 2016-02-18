@@ -40,8 +40,8 @@ $game.gameOfLife({
 });
 
 var game = $game.data("gameOfLife");
-game.randomize();
-
-//game.addGlider(4,5);
+//game.randomize();
+game.addCustomLifeForm1(4,5);
+game.addCustomLifeForm1(140,105);
 
 game.toggle();
