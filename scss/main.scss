@@ -16,6 +16,10 @@ $cd-light: #f7fcb9;
 // GENERAL
 //
 
+body {
+    background-color: #F0F0F0;
+}
+
 #trianglify {
     display: block;
     position: absolute;
@@ -86,11 +90,6 @@ $cd-light: #f7fcb9;
 }
 
 @media (min-width: 768px) {
-    body {
-        background-color: #F0F0F0;
-        //background-color: #2196F3;        
-    }
-
     #marcel {
         margin-top: 48px;
         @include border-radius(5px);

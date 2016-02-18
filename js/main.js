@@ -13,25 +13,37 @@ jQuery(document).ready(function($) {
     });
 
     // background
-    //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
-    var pattern = Trianglify({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        cell_size: 90,
-        variance: 1,
-        //x_colors: ["#A7A7A7", "#FFFFFF", "#D3D3D3", "#7B7B7B"],
-        x_colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB"],
-        y_colors: 'match_x',
-        //palette: Trianglify.colorbrewer,
-        //color_space: 'lab',
-        //color_function: false,
-        stroke_width: 1.51,
-        seed: '52a300'
+    $(window).bind('resize', function(event) {
+        var width = window.innerWidth, height = window.innerHeight;
+
+        if (width >= 768) {
+            $('#trianglify').remove();
+
+            //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
+            var pattern = Trianglify({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                cell_size: 90,
+                variance: 1,
+                //x_colors: ["#A7A7A7", "#FFFFFF", "#D3D3D3", "#7B7B7B"],
+                x_colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB"],
+                y_colors: 'match_x',
+                //palette: Trianglify.colorbrewer,
+                //color_space: 'lab',
+                //color_function: false,
+                stroke_width: 1.51,
+                seed: '52a300'
+            });
+
+            var background = pattern.canvas();
+            background.id = "trianglify";
+            document.body.appendChild(background);
+        }else {
+            $('#trianglify').remove();
+        }
     });
 
-    var background = pattern.canvas();
-    background.id = "trianglify";
-    document.body.appendChild(background);
+    $(window).trigger('resize');
 });
 
 // game of life
