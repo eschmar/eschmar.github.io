@@ -10,18 +10,6 @@ jQuery(document).ready(function($) {
         $hireable.html(hireableVal);
     });
 
-    // game of life
-    var $game = $('#game');
-    $game.gameOfLife({
-        transparent: false,
-        cellSize: 5,
-        speed: 300
-    });
-
-    var game = $game.data("gameOfLife");
-    game.randomize();
-    game.toggle();
-
     // background
     //"#BBB8BF", "#7C7A7F", "#F9F5FF", "#3E3D40", "#E0DCE5"
     var pattern = Trianglify({
@@ -43,6 +31,17 @@ jQuery(document).ready(function($) {
     document.body.appendChild(background);
 });
 
+// game of life
+var $game = $('#game');
+$game.gameOfLife({
+    transparent: false,
+    cellSize: 5,
+    speed: 100
+});
 
+var game = $game.data("gameOfLife");
+game.randomize();
 
+//game.addGlider(4,5);
 
+game.toggle();
