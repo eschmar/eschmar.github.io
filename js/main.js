@@ -50,7 +50,10 @@ $game.gameOfLife({
     transparent: false,
     cellSize: 5,
     speed: 100,
-    colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB", "#FFDD00"]
+    colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB", "#FFDD00"],
+    onClick: function(game, x, y) {
+        game.addGlider(x,y);
+    }
 });
 
 
@@ -61,3 +64,14 @@ game.addCustomLifeForm1(140,105);
 game.addWeekender(71,38);
 
 game.toggle();
+
+document.addEventListener('keydown', function(event) {
+    switch (event.keyCode) {
+        case 82:
+            game.randomize();
+            break;
+        case 84:
+            game.toggle();
+            break;
+    }
+});
