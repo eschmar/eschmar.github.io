@@ -70,6 +70,10 @@ document.addEventListener('keydown', function(event) {
         case 82:
             game.randomize();
             break;
+        case 67:
+        case 75:
+            game.killAll();
+            break;
         case 84:
             game.toggle();
             break;
