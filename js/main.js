@@ -79,3 +79,14 @@ document.addEventListener('keydown', function(event) {
             break;
     }
 });
+
+// pressure js (force touch scramble)
+$game.pressure({
+    startDeepPress: function(event){
+        game.randomize();
+        console.log("pew");
+    },
+    endDeepPress: function(){
+        // this is called when the "force click" / "deep press" end
+    }
+});
