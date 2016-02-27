@@ -117,3 +117,15 @@ body {
     }
 }
 
+.game-hints {
+    text-align: center;
+    color: white;
+    margin: 24px 0;
+    font-size: 11px;
+    @include opacity(0.15);
+    @include transition(opacity .5s $easeInOutQuad);
+
+    &:hover {
+        @include opacity(1);
+    }
+}

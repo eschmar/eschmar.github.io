@@ -2,6 +2,12 @@
 //  General
 //
 
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
 @mixin box-sizing ($arguments) {
     -webkit-box-sizing: $arguments;
     -moz-box-sizing: $arguments;
