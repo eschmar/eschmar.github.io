@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
         $location.html(data.location.replace(', Sweden', ''));
 
         var hireableVal = "No";
-        if (data.hireable == true) { hireableVal = "Yes"}
+        if (data.hireable == true) { hireableVal = "Yes"; }
         $hireable.html(hireableVal);
     });
 
@@ -26,9 +26,6 @@ jQuery(document).ready(function($) {
                 variance: 1,
                 x_colors: ["#5D9EFF", "#B5D3FF", "#84B6FF", "#3486FF", "#1170FB"],
                 y_colors: 'match_x',
-                //palette: Trianglify.colorbrewer,
-                //color_space: 'lab',
-                //color_function: false,
                 stroke_width: 1.51,
                 seed: '52a300'
             });
@@ -58,7 +55,6 @@ $game.gameOfLife({
 
 
 var game = $game.data("gameOfLife");
-//game.randomize();
 game.addCustomLifeForm1(4,5);
 game.addCustomLifeForm1(140,105);
 game.addWeekender(71,38);
@@ -84,9 +80,6 @@ document.addEventListener('keydown', function(event) {
 $game.pressure({
     startDeepPress: function(event){
         game.randomize();
-        console.log("pew");
     },
-    endDeepPress: function(){
-        // this is called when the "force click" / "deep press" end
-    }
+    endDeepPress: function(){}
 });
