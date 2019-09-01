@@ -1,6 +1,1 @@
 *.DS_Store
-*.sublime-project
-*.sublime-workspace
-/node_modules/
-.sass-cache
-.gulp-scss-cache
