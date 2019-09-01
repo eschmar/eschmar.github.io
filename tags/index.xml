@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on eschmann.io</title>
+    <link>https://eschmann.io/tags/</link>
+    <description>Recent content in Tags on eschmann.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://eschmann.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>app-bundle</title>
+      <link>https://eschmann.io/tags/app-bundle/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/app-bundle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>applescript</title>
+      <link>https://eschmann.io/tags/applescript/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/applescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cross-platform</title>
+      <link>https://eschmann.io/tags/cross-platform/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/cross-platform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>custom-file-type</title>
+      <link>https://eschmann.io/tags/custom-file-type/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/custom-file-type/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>file-extension</title>
+      <link>https://eschmann.io/tags/file-extension/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/file-extension/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gradle</title>
+      <link>https://eschmann.io/tags/gradle/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/gradle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>https://eschmann.io/tags/java/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javafx</title>
+      <link>https://eschmann.io/tags/javafx/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/javafx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>general</title>
+      <link>https://eschmann.io/tags/general/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/general/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hello-world</title>
+      <link>https://eschmann.io/tags/hello-world/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.io/tags/hello-world/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

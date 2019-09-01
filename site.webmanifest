@@ -1,0 +1,13 @@
+{
+    "name": "eschmann.io",
+    "short_name": "eschmann.io",
+    "icons": [{
+        "src": "/icon.png",
+        "sizes": "540x540",
+        "type": "image/png"
+    }],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#6751fe",
+    "background_color": "#fafafa"
+}
