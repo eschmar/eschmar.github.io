@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>applescript on eschmann.io</title>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://eschmann.io/posts/javafx-mac-os-custom-file-type/</guid>
-      <description>tldr: Link to Boilerplate on Github
+      <description>tldr: Link to Boilerplate on Github, see the follow-up post.
  I recently found myself in the position of wanting to bundle a small desktop application for interacting with a custom file type. It should recognise the file extension and be as minimal as possible, ideally acting as a thin layer on top of an existing code base. Said code base, to give some context, consists of a native c++ sdk and wrappers for mobile platforms.</description>
     </item>
     
