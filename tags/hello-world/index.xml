@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hello-world on eschmann.io</title>
-    <link>https://eschmann.io/tags/hello-world/</link>
-    <description>Recent content in hello-world on eschmann.io</description>
+    <title>hello-world on eschmann.dev</title>
+    <link>https://eschmann.dev/tags/hello-world/</link>
+    <description>Recent content in hello-world on eschmann.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://eschmann.io/tags/hello-world/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://eschmann.dev/tags/hello-world/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello World</title>
-      <link>https://eschmann.io/posts/hello-world/</link>
+      <link>https://eschmann.dev/posts/hello-world/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://eschmann.io/posts/hello-world/</guid>
+      <guid>https://eschmann.dev/posts/hello-world/</guid>
       <description>This post serves as a timestamp for the start of my very own blog. Hopefully it will not dwell in solitude for long.</description>
     </item>
     

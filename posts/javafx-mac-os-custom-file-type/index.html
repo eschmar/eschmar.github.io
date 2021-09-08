@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bundling JavaFX 12 on MacOS for a custom file extension using AppleScript :: eschmann.io</title>
+    <title>Bundling JavaFX 12 on MacOS for a custom file extension using AppleScript :: eschmann.dev</title>
 
     
-      <meta name="description" content="Accompanying post to a JavaFX boilerplate on Github ~ eschmann.io">
+      <meta name="description" content="Accompanying post to a JavaFX boilerplate on Github ~ eschmann.dev">
     
 
     <meta name="keywords" content="Blog,Marcel,Eschmann" />
@@ -16,7 +16,7 @@
     <meta name="generator" content="Hugo 0.72.0" />
 
     
-    <link rel="stylesheet" href="https://eschmann.io/sass/main.min.477b80e26de07ec85d5570ed6ef6389cc0ae9358681492af481ec7d935b30020.css">
+    <link rel="stylesheet" href="https://eschmann.dev/sass/main.min.1ed9bc49c5e165278b1de4794d36df622bf17adf9a52abadcc979ed9702c79c9.css">
 
     <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/icon.png">
@@ -26,8 +26,8 @@
 
     
     
-    <meta property="og:image" content="https://eschmann.io/icon.png">
-    <meta property="og:site_name" content="eschmann.io">
+    <meta property="og:image" content="https://eschmann.dev/icon.png">
+    <meta property="og:site_name" content="eschmann.dev">
 
     
   </head>
@@ -37,7 +37,7 @@
   <div class="inner">
     <canvas id="gameoflife" width="864" height="124" alt="Press R or T."></canvas>
 
-    <a href="https://eschmann.io" class="logo">
+    <a href="https://eschmann.dev" class="logo">
       <span class="text">~eschmann</span>
       <span class="cursor"></span>
     </a>
@@ -61,7 +61,7 @@
 
   <section class="content markdown-body">
     <blockquote>
-<p>tldr: <a href="https://github.com/eschmar/javafx-custom-file-ext-boilerplate">Link to Boilerplate on Github</a>, see <a href="https://eschmann.io/posts/javafx-mac-os-custom-file-type-jpackage/">the follow-up post</a>.</p>
+<p>tldr: <a href="https://github.com/eschmar/javafx-custom-file-ext-boilerplate">Link to Boilerplate on Github</a>, see <a href="https:/dev/posts/javafx-mac-os-custom-file-type-jpackage/">the follow-up post</a>.</p>
 </blockquote>
 <p>I recently found myself in the position of wanting to bundle a small desktop application for interacting with a custom file type. It should recognise the file extension and be as minimal as possible, ideally acting as a thin layer on top of an existing code base. Said code base, to give some context, consists of a native c++ sdk and wrappers for mobile platforms. In this post I&rsquo;d like to address the issues I faced using JavaFX to build a desktop app bundle for MacOS, that acts as a viewer for a custom file type. We will be using OpenJDK 12, OpenJFX 12 and Gradle. The goal:</p>
 <p>In order to handle opening a file, the application somehow needs to receive a file path upon launch. Usually, this information is provided through command line arguments, however MacOS behaves differently. The operating system sends Apple system events containing the filename to the application and it is left to the developer to be ready for capturing mentioned events once they are fired. This stems from expecting multiple app instances by default, however results in somes issues for Java bundles and represents the main reason for this post.</p>
@@ -123,21 +123,21 @@
           
 
           
-            <li><a href="https://eschmann.io/tags/java/">java</a></li>
+            <li><a href="https://eschmann.dev/tags/java/">java</a></li>
           
-            <li><a href="https://eschmann.io/tags/javafx/">javafx</a></li>
+            <li><a href="https://eschmann.dev/tags/javafx/">javafx</a></li>
           
-            <li><a href="https://eschmann.io/tags/gradle/">gradle</a></li>
+            <li><a href="https://eschmann.dev/tags/gradle/">gradle</a></li>
           
-            <li><a href="https://eschmann.io/tags/custom-file-type/">custom-file-type</a></li>
+            <li><a href="https://eschmann.dev/tags/custom-file-type/">custom-file-type</a></li>
           
-            <li><a href="https://eschmann.io/tags/file-extension/">file-extension</a></li>
+            <li><a href="https://eschmann.dev/tags/file-extension/">file-extension</a></li>
           
-            <li><a href="https://eschmann.io/tags/app-bundle/">app-bundle</a></li>
+            <li><a href="https://eschmann.dev/tags/app-bundle/">app-bundle</a></li>
           
-            <li><a href="https://eschmann.io/tags/cross-platform/">cross-platform</a></li>
+            <li><a href="https://eschmann.dev/tags/cross-platform/">cross-platform</a></li>
           
-            <li><a href="https://eschmann.io/tags/applescript/">applescript</a></li>
+            <li><a href="https://eschmann.dev/tags/applescript/">applescript</a></li>
           
         </ul>
       </section>
@@ -147,14 +147,14 @@
   
   <div class="pagination-single">
     
-      <a href="https://eschmann.io/posts/javafx-mac-os-custom-file-type-jpackage/">
+      <a href="https://eschmann.dev/posts/javafx-mac-os-custom-file-type-jpackage/">
         <span class="label">Next post</span>
         <span class="title">jpackage to the rescue (follow-up)</span>
       </a>
     
 
     
-      <a href="https://eschmann.io/posts/hello-world/">
+      <a href="https://eschmann.dev/posts/hello-world/">
         <span class="label">Previous post</span>
         <span class="title">Hello World</span>
       </a>
@@ -171,7 +171,7 @@
   </div>
 
   <div class="copyright">
-    <span>&copy; 2016 eschmann.io</span>
+    <span>&copy; 2016 eschmann.dev</span>
 
     
   </div>
@@ -189,7 +189,7 @@
     
     
     
-    <script type="text/javascript" src="https://eschmann.io/js/bundle.min.c105172c16a36702ee983a6f0c891019eff137bb9450efebfc1a0511e8121b2f.js"></script>
+    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.c105172c16a36702ee983a6f0c891019eff137bb9450efebfc1a0511e8121b2f.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
