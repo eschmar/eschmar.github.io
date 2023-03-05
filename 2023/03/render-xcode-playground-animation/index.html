@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Render SwiftUI animations to mp4 in Xcode playgrounds :: eschmann.dev</title>
+
+    
+      <meta name="description" content="Simple approach to render each frame of a SwiftUI animation to a png file. And how to assemble the frames into an mp4 video. ~ eschmann.dev">
+    
+
+    <meta name="keywords" content="Blog,Marcel,Eschmann" />
+
+    <meta name="generator" content="Hugo 0.109.0">
+
+    
+    <link rel="stylesheet" href="https://eschmann.dev/sass/main.min.b6176b4c56939af859a497f5bdd5a9403a38c786b644f8aa420f6ce6a2c1f4d1.css">
+
+    <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#6751fe">
+
+    
+    
+    <meta property="og:image" content="https://eschmann.dev/icon.png">
+    <meta property="og:site_name" content="eschmann.dev">
+
+    
+  </head>
+
+  <body class="body single ">
+    <header class="header">
+  <div class="inner">
+    <canvas id="gameoflife" width="864" height="124" alt="Press R or T."></canvas>
+
+    <a href="https://eschmann.dev" class="logo">
+      <span class="text">~eschmann</span>
+      <span class="cursor"></span>
+    </a>
+
+    <nav class="right"></nav>
+  </div>
+</header>
+<main class="container" role="main">
+<article class="post wrap line-numbers">
+  <section class="meta">
+      
+        <time class="date">
+          2023-03-01
+        </time>
+      
+
+      <span class="read-time">— 5 min read</span>
+  </section>
+
+  <h1 class="post-heading">Render SwiftUI animations to mp4 in Xcode playgrounds</h1>
+
+  <section class="content markdown-body">
+    <p>I&rsquo;ve found it convenient to prototype SwiftUI animations in Xcode playgrounds, to quickly render custom views without getting into creating an entire project. The result is a single file that is easily shareable code-wise. Sharing the visual result however, is not as easy. There is no built-in way of capturing the rendered output. Resorting to the various screen-recording apps out there does not yield the expected quality, but also seems like a round-about way, when already working with a rendering engine directly.</p>
+<p>In this post we explore the possibility of rendering videos directly from the playground. For this purpose, we will reuse an animation I was working on recently. The basic idea is to render a gradient along a circular path, in order to implement a knob-like input control. Actual utility of the control is not important here. The result looks like this:</p>
+<video controls width="480" height="480" class="img-center img-rounded" title="Gradient along a circular path animation.">
+    <source src="/images/gradient-along-circular-path.mp4" type="video/mp4">
+    Your browser does not support the video tag. Find the video here: <a href="/images/gradient-along-circular-path.mp4">MP4</a>.
+</video>
+<p>Initially, I was expecting to use a linear gradient as a lookup map, like a texture. But then realised that since the path is always circular, it&rsquo;s possible to take advantage of an angular gradient and use it as a mask over a path. The <a href="https://gist.github.com/eschmar/e6854e5d6ce50404ee5f182e8eeb4950/cab464196e0699cab62b2bbb1306185acc6da277">code for the animation, step 1, is avilable on Github</a>.</p>
+<p>What the animation looks like is not really relevant to this post, as it focuses on how to capture a video of any animation. As such, the animation&rsquo;s implementation is not discussed any further.</p>
+<h2 id="render-each-frame-individually">Render each frame individually<a href="#render-each-frame-individually" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Apple offers a class called <a href="https://developer.apple.com/documentation/swiftui/imagerenderer">ImageRenderer</a>, allowing to export images from SwiftUI views. The first goal is to render a singular frame. Once it&rsquo;s possible to render one frame, it should be straightforward to loop through all frames of an animation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> renderer = ImageRenderer(content: Text(<span style="color:#e6db74">&#34;Stay Awhile and Listen!&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> filepath = ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//renderer.scale = displayScale</span>
+</span></span><span style="display:flex;"><span>renderer.scale = <span style="color:#ae81ff">3.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> renderer.uiImage?.pngData()?.write(to: filepath)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;&gt; Error: </span><span style="color:#e6db74">\(</span>filepath.path<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;&gt; Error: </span><span style="color:#e6db74">\(</span>error.localizedDescription<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Above excerpt can be summarised in three steps. Initialise a renderer with the SwiftUI view of interest, define a scale and instruct on where to render to. Especially the render scale is interesting. A screen recording tool would capture the animation depending on the developer&rsquo;s monitor and its inherent display scaling. This approach offers full control to render frames at multiples that will look crisp on any monitor.</p>
+<h2 id="integrate-into-playground">Integrate into playground<a href="#integrate-into-playground" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Ideally, it&rsquo;d be possible to just render the body of the prototyping view:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span>@MainActor <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">render</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> renderer = ImageRenderer(content: <span style="color:#66d9ef">self</span>.body)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Unfortunately, this will entangle the playground in an infinite loop. The solution is to move the prototype view into a view builder function and to reuse it in both view body and rendering:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> body: some View {
+</span></span><span style="display:flex;"><span>    prototypeView()
+</span></span><span style="display:flex;"><span>        .onAppear {
+</span></span><span style="display:flex;"><span>            render()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@ViewBuilder <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">prototypeView</span>() -&gt; some View {
+</span></span><span style="display:flex;"><span>    ZStack {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>    }.frame(width: <span style="color:#ae81ff">320</span>, height: <span style="color:#ae81ff">320</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@MainActor <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">render</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> renderer = ImageRenderer(content: prototypeView())
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Success. This will render the first frame of our animation in the playground canvas, write it to disk and conclude the execution. Please note that the render function was marked with the <code>@MainActor</code> annotation to ensure call safety. See the <a href="https://gist.github.com/eschmar/e6854e5d6ce50404ee5f182e8eeb4950/c3983b9c28f9384f47dc4e74c1d880312fe8df70">code for step 2 here</a>.</p>
+<h2 id="full-animation-loop">Full animation loop<a href="#full-animation-loop" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The inability to render the view body directly, as well as the inaccesibility of partial animation values from state variables in SwiftUI, means that the render function needs to steer the value progression itself. The following code excerpt showcases how the <code>progress</code> animation value was extracted as an input value to the view builder function. After that, it&rsquo;s a matter of rendering each frame in a loop:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span>@MainActor <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">render</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// Render configuration for animation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> fps = <span style="color:#ae81ff">144.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> duration = <span style="color:#ae81ff">0.72</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> from = <span style="color:#ae81ff">10.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> to = <span style="color:#ae81ff">270.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0.</span>..Int(ceil(duration <span style="color:#f92672">*</span> fps)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// Calculate current animation step values</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> fraction: Double = (Double(i) <span style="color:#f92672">/</span> (duration <span style="color:#f92672">*</span> fps))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> progress = from <span style="color:#f92672">+</span> (to <span style="color:#f92672">-</span> from) <span style="color:#f92672">*</span> fraction
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> renderer = ImageRenderer(content: prototypeView(progress))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> filename = String(format: <span style="color:#e6db74">&#34;%05d&#34;</span>, i)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// ... render frame</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Done.&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>With the configuration above, 104 frames (<code>00000.png</code> to <code>000104.png</code>) are written to disk. Having the ability to step through each animation frame is a great help for debugging. It also enables fine-grained control by tweaking the parameters.</p>
+<p>The keen eye might have noticed that the animation at the very top consisted of some easing, but that the loop above is just linear. Different easing function can be applied by modifying the <code>fraction</code> variable to something non-linear, for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Easing</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">easeInOutSine</span>(x: Double) -&gt; Double {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>(cos(Double.pi <span style="color:#f92672">*</span> x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1.0</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>With everything in place, the <a href="https://gist.github.com/eschmar/e6854e5d6ce50404ee5f182e8eeb4950/ed5651eceb416668bd2ca5f6d999209b29ece6b3">resulting playground</a> shows the animation in the playground preview, and also renders each individual frame according to the input parameters to disk. With some care it&rsquo;s possible for the preview and rendered animation to behave the same. After the playground from the Gist above is exectued, all 104 numerated frames on disk are ready to be consolidated into a video in the final step ahead.</p>
+<h2 id="sequential-frames-to-video-with-ffmpeg">Sequential frames to video with FFmpeg<a href="#sequential-frames-to-video-with-ffmpeg" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Strictly speaking, the goal of the post was to stay within the Xcode Playground. That would be possible using an <a href="https://developer.apple.com/documentation/avfoundation/avcomposition">AVComposition</a>, but that would bloat the playground further. An easier approach is to use FFmpeg, which offers a very simple syntax to control the assembly and output video:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ffmpeg -framerate <span style="color:#ae81ff">144</span> -i %05d.png -c:v libx264 -crf <span style="color:#ae81ff">14</span> -r <span style="color:#ae81ff">144</span> -pix_fmt yuv420p out.mp4
+</span></span></code></pre></div><p>It is important that the input framerate <code>-framerate 144</code> matches the configuration in the render method, such that the final video duration is correct. The remaining parameters impact the output video quality. In most cases, the output framerate <code>-r 144</code> should match the input. A scale between 0–51 called the <a href="https://trac.ffmpeg.org/wiki/Encode/H.264#a1.ChooseaCRFvalue">Constant Rate Factor</a>, in this case <code>-crf 14</code>, determines the video quality and therefore file size. More infromation can be found in the documentation: <a href="https://trac.ffmpeg.org/wiki/Slideshow">Slideshow (FFmpeg Wiki)</a>.</p>
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>With only a few steps, it&rsquo;s now possible to render SwiftUI animations as mp4 video. At the same time it&rsquo;s easy to debug individual animations steps and to control the output quality. It would be nice to find a way to render the view body directly - and using the partial values of SwiftUI animations directly, for that matter. But this approach feels like a fair compromise.</p>
+
+  </section>
+
+  <section class="post-meta">
+    
+      <section class="tags">
+        <ul class="tags-list">
+          
+            <li class="location"><a href="https://maps.google.com/?q=stockholm-sverige">Stockholm, Sverige</a></li>
+          
+
+          
+            <li><a href="https://eschmann.dev/tags/swiftui/">swiftui</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/xcode/">xcode</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/playground/">playground</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/animations/">animations</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/render/">render</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/ffmpeg/">ffmpeg</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/frame/">frame</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/video/">video</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/gradient/">gradient</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/path/">path</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/circular/">circular</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/programmatically/">programmatically</a></li>
+          
+        </ul>
+      </section>
+    
+  </section>
+
+  
+  <div class="pagination-single">
+    
+      <span>&nbsp;</span>
+    
+
+    
+      <a href="https://eschmann.dev/2022/12/no-need-for-comments/">
+        <span class="label">Previous post</span>
+        <span class="title">The need for comments</span>
+      </a>
+    
+  </div>
+  
+</article>
+
+    </main><footer class="footer wrap" role="contentinfo">
+  <div class="about">
+    <a href="https://twitter.com/eschmar" target="_blank" rel="noopener">
+      <img src="/marcel.jpg" alt="Marcel Eschmann" class="portrait">
+    </a>
+  </div>
+
+  <div class="copyright">
+    <span>&copy; 2016 eschmann.dev</span>
+
+    
+  </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73950662-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-73950662-1');
+    </script>
+
+    
+    
+    
+    
+    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.4293d5c79ecf95f2c629439b6b1e5ba4b1241f9f83354ed83e74d49e69aaf672.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+onload="renderMathInElement(document.body);"></script>
+
+  </body>
+</html>

@@ -6,19 +6,15 @@
     <description>Recent content in applescript on eschmann.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://eschmann.dev/tags/applescript/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://eschmann.dev/tags/applescript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bundling JavaFX 12 on MacOS for a custom file extension using AppleScript</title>
-      <link>https://eschmann.dev/posts/javafx-mac-os-custom-file-type/</link>
+      <link>https://eschmann.dev/2019/08/javafx-mac-os-custom-file-type/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://eschmann.dev/posts/javafx-mac-os-custom-file-type/</guid>
+      <guid>https://eschmann.dev/2019/08/javafx-mac-os-custom-file-type/</guid>
       <description>tldr: Link to Boilerplate on Github, see the follow-up post.
- I recently found myself in the position of wanting to bundle a small desktop application for interacting with a custom file type. It should recognise the file extension and be as minimal as possible, ideally acting as a thin layer on top of an existing code base. Said code base, to give some context, consists of a native c++ sdk and wrappers for mobile platforms.</description>
+I recently found myself in the position of wanting to bundle a small desktop application for interacting with a custom file type. It should recognise the file extension and be as minimal as possible, ideally acting as a thin layer on top of an existing code base. Said code base, to give some context, consists of a native c++ sdk and wrappers for mobile platforms.</description>
     </item>
     
   </channel>

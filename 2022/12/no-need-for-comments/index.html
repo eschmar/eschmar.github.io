@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>The need for comments :: eschmann.dev</title>
+
+    
+      <meta name="description" content="The balance between legibility and effort excerted to maintain documentation is a fine, but worth-while one to get right. A new reader will be thankful to get an overview of a code-base in a shorter amount of time. ~ eschmann.dev">
+    
+
+    <meta name="keywords" content="Blog,Marcel,Eschmann" />
+
+    <meta name="generator" content="Hugo 0.109.0">
+
+    
+    <link rel="stylesheet" href="https://eschmann.dev/sass/main.min.b6176b4c56939af859a497f5bdd5a9403a38c786b644f8aa420f6ce6a2c1f4d1.css">
+
+    <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#6751fe">
+
+    
+    
+    <meta property="og:image" content="https://eschmann.dev/icon.png">
+    <meta property="og:site_name" content="eschmann.dev">
+
+    
+  </head>
+
+  <body class="body single ">
+    <header class="header">
+  <div class="inner">
+    <canvas id="gameoflife" width="864" height="124" alt="Press R or T."></canvas>
+
+    <a href="https://eschmann.dev" class="logo">
+      <span class="text">~eschmann</span>
+      <span class="cursor"></span>
+    </a>
+
+    <nav class="right"></nav>
+  </div>
+</header>
+<main class="container" role="main">
+<article class="post wrap line-numbers">
+  <section class="meta">
+      
+        <time class="date">
+          2022-12-08
+        </time>
+      
+
+      <span class="read-time">— 5 min read</span>
+  </section>
+
+  <h1 class="post-heading">The need for comments</h1>
+
+  <section class="content markdown-body">
+    <p>There seems to be at least some friction in writing code comments. And recently I&rsquo;ve come more often across the claim:</p>
+<blockquote>
+<p>&ldquo;If code is written clearly enough, there is no need for comments.&rdquo;</p>
+</blockquote>
+<p>In my opinion, code is a projection of your mental model of what you are working on at a specific point in time. The clearer your thoughts, the more precise the mental model and code. This means that a fair amount of big-picture thinking is a prerequisite, in order to produce a clear and concise code contribution. If you consider that a repository ends up being a patch-work of mental models over time, it&rsquo;s really hard to maintain this clarity without any additional explanation. A new person reading into a code base is only able to understand another author&rsquo;s intentions by following the hints that were left behind.</p>
+<p>A simple example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">cron</span>.<span style="color:#a6e22e">schedule</span>(<span style="color:#a6e22e">schedule</span>.<span style="color:#a6e22e">EVERY_HOUR</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">analytics</span>();
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>The only take-aways from this excerpt is that seemingly a cron-job is running every hour and that some sort of analytics will be performed. Without opening the file that this function is exported from, the code itself is not capable of painting a clear picture of its purpose for the reader. Now imagine that this is one of many cron jobs.. This encourages a <strong>depth-first</strong> approach <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> in exploring the repository!</p>
+<p>Let&rsquo;s try a better function name:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">cron</span>.<span style="color:#a6e22e">schedule</span>(<span style="color:#a6e22e">schedule</span>.<span style="color:#a6e22e">EVERY_HOUR</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetchJobsAndExecuteAnalyticUpdates</span>();
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Nice, there are more hints on what happens. But still, the code excerpt only ever focuses on the <em>how</em>, never on the <em>why</em>. Often times I&rsquo;ve noticed that even when additional comments are added, that it&rsquo;s simply a regurgitation of the function name. Instead, let&rsquo;s try focusing on the <em>why</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * In order to reduce response times, database writes for analytics
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * are separated from read operations. This cron job works down the
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * queued analytics events gathered from requests.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cron</span>.<span style="color:#a6e22e">schedule</span>(<span style="color:#a6e22e">schedule</span>.<span style="color:#a6e22e">EVERY_HOUR</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetchJobsAndExecuteAnalyticUpdates</span>();
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>While this explanation might still not be perfect, suddenly, the reader may understand the intention at this level and move on, if it is not applicable to their current interests. At the same time, the reader learned something about the architecture and may recall it at another code location. A <strong>breadth-first</strong> approach<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>You&rsquo;ll find that the same principle applies when looking at a repository without any readme file. Unless some strong motivation like a referral or exhaustion of all other options exists, the friction of trying to build the project or trouble-shooting errors is too high. The repository will be avoided and forgotten.</p>
+<h2 id="who-you-are-writing-for">Who you are writing for<a href="#who-you-are-writing-for" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>This seems like a lot of effort for other readers - who might not materialise. But it is important to emphasize the insight above, that by writing the right comments and documentation, the author is automatically encouraged to engage in more big picture thinking. This will help solidify the mental model surrounding the project and improve how closely the code base resembles that mental model - an investment into yourself, as well as future-you.</p>
+<p>In a company setting, code is usually reviewed as part of a pull request. Ideally such pull requests can be reviewed:</p>
+<ul>
+<li>by any developer on the team (without deep knowledge of the project)</li>
+<li>in a short amount of time (to reduce the lifespan of branches)</li>
+</ul>
+<p>My experience is that if the pull request does not match the intended change that I expected, it is necessary to read into the code base itself, to figure out where this discrepancy stems from. Is my mental model wrong or are we not working towards the right goal here? At this point, it is not only an investment of time, but also mental power capacity. It heavily depends on the quality of comments and documentation. If not enough hints are left behind, it is likely that the review gets postponed and confidence in the project decreases. The ability to mentor across teams suffers.</p>
+<p>Once the discussion inevitably moves away from its asynchronous nature, the quality of that exchange depends on the original author&rsquo;s availablity and memory capacity. It is way easier to hand off pointers to specific code areas if documentation exists. Writing the right comments facilitates the path from pull request to merge for yourself, as well as improves the impression that colleagues will be left with.</p>
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>My advice:</p>
+<blockquote>
+<p>For any reasonably serious code base, an effort should be excerted to maintain a structure which is inviting for another developer to dive into.</p>
+</blockquote>
+<p>This includes the habit of writing self-explanatory file/class/function names and documentation at various levels, be that a singular function or the readme file for the whole repository. Without any comments, the code-base can only ever represent what is already there. Documentation is an opportunity for colleagues to evaluate your mental model without your presence. It is a win-win in terms of quality of code and onboarding processes.</p>
+<p>In many ways, a lot of parallels can be drawn to the habit of writing unit tests, though some other caveats apply. But that&rsquo;s a topic for another time.</p>
+<!-- >>> BACKUP:
+
+* Essay: often i hear people saying that if the code is clear enough, then there is no need for comments.
+* However, i feel that the code is a projection of your mental model of a certain project or product. So the clearer you think, the more precise the mental model and code.
+* That also means the more big picture thinking you do while working on a specific part of how it fits into the whole picture, the clearer the code.
+* A new person reading into your code base is only as able to understand your specific mental model as many hints as you leave.
+* This results in the danger that you make assumptions about the clarity of your mental model “it’s right there in the code!”, instead to be open to new angles.
+* This means that additional communication on syncing the mental model needs to be done either before or after the implementation.
+* There is space for both situations. But by writing comments you encourage yourself to do more big picture thinking and leave more crumbs for future you or other employees to understand your mental model.
+* A win-win in terms of quality of code and onboarding process.-> ideally in the end, it would allow for someone without deep knowledge of a project or even team, but who is senior, to review your pull request without exhausting much mental power capacity, which in turn increases not only confidence, but also reduces pull request turn around.
+* In many ways, a lot of parallels can be drawn to the habit of writing unit tests, though some other caveats apply. -->
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth-first search</a> is tree-traversal algorithm that first explores as far as possible along a path, before back-tracking. In contrast to <a href="https://en.wikipedia.org/wiki/Breadth-first_search">breadth-first search</a>, which iteratively explores all children nodes at a given depth.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+
+  <section class="post-meta">
+    
+      <section class="tags">
+        <ul class="tags-list">
+          
+            <li class="location"><a href="https://maps.google.com/?q=stockholm-sverige">Stockholm, Sverige</a></li>
+          
+
+          
+            <li><a href="https://eschmann.dev/tags/essay/">essay</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/code/">code</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/comments/">comments</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/mental-model/">mental model</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/documentation/">documentation</a></li>
+          
+        </ul>
+      </section>
+    
+  </section>
+
+  
+  <div class="pagination-single">
+    
+      <a href="https://eschmann.dev/2023/03/render-xcode-playground-animation/">
+        <span class="label">Next post</span>
+        <span class="title">Render SwiftUI animations to mp4 in Xcode playgrounds</span>
+      </a>
+    
+
+    
+      <a href="https://eschmann.dev/2020/06/javafx-mac-os-custom-file-type-jpackage/">
+        <span class="label">Previous post</span>
+        <span class="title">jpackage to the rescue (follow-up)</span>
+      </a>
+    
+  </div>
+  
+</article>
+
+    </main><footer class="footer wrap" role="contentinfo">
+  <div class="about">
+    <a href="https://twitter.com/eschmar" target="_blank" rel="noopener">
+      <img src="/marcel.jpg" alt="Marcel Eschmann" class="portrait">
+    </a>
+  </div>
+
+  <div class="copyright">
+    <span>&copy; 2016 eschmann.dev</span>
+
+    
+  </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73950662-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-73950662-1');
+    </script>
+
+    
+    
+    
+    
+    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.4293d5c79ecf95f2c629439b6b1e5ba4b1241f9f83354ed83e74d49e69aaf672.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+onload="renderMathInElement(document.body);"></script>
+
+  </body>
+</html>

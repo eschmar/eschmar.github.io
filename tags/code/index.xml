@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>code on eschmann.dev</title>
+    <link>https://eschmann.dev/tags/code/</link>
+    <description>Recent content in code on eschmann.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://eschmann.dev/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The need for comments</title>
+      <link>https://eschmann.dev/2022/12/no-need-for-comments/</link>
+      <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://eschmann.dev/2022/12/no-need-for-comments/</guid>
+      <description>There seems to be at least some friction in writing code comments. And recently I&amp;rsquo;ve come more often across the claim:
+&amp;ldquo;If code is written clearly enough, there is no need for comments.&amp;rdquo;
+In my opinion, code is a projection of your mental model of what you are working on at a specific point in time. The clearer your thoughts, the more precise the mental model and code. This means that a fair amount of big-picture thinking is a prerequisite, in order to produce a clear and concise code contribution.</description>
+    </item>
+    
+  </channel>
+</rss>
