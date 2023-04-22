@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Revisiting popcount on Postgres 14 :: eschmann.dev</title>
+
+    
+      <meta name="description" content="Revisiting popcount on PostgreSQL 14 ~ eschmann.dev">
+    
+
+    <meta name="keywords" content="Blog,Marcel,Eschmann" />
+
+    <meta name="generator" content="Hugo 0.109.0">
+
+    
+    <link rel="stylesheet" href="https://eschmann.dev/sass/main.min.b6176b4c56939af859a497f5bdd5a9403a38c786b644f8aa420f6ce6a2c1f4d1.css">
+
+    <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#6751fe">
+
+    
+    
+    <meta property="og:image" content="https://eschmann.dev/icon.png">
+    <meta property="og:site_name" content="eschmann.dev">
+
+    
+  </head>
+
+  <body class="body single ">
+    <header class="header">
+  <div class="inner">
+    <canvas id="gameoflife" width="864" height="124" alt="Press R or T."></canvas>
+
+    <a href="https://eschmann.dev" class="logo">
+      <span class="text">~eschmann</span>
+      <span class="cursor"></span>
+    </a>
+
+    <nav class="right"></nav>
+  </div>
+</header>
+<main class="container" role="main">
+<article class="post wrap line-numbers">
+  <section class="meta">
+      
+        <time class="date">
+          2023-04-05
+        </time>
+      
+
+      <span class="read-time">— 4 min read</span>
+  </section>
+
+  <h1 class="post-heading">Revisiting popcount on Postgres 14</h1>
+
+  <section class="content markdown-body">
+    <!-- 
+* Rethink the blog post from the perspective of:
+	* someone with zero knowledge
+	* someone coming from the repository
+	* someone with some background knowledge.
+-->
+<blockquote>
+<p>Tl;dr: Skip to <a href="#new-benchmark-results">benchmark results</a>.</p>
+</blockquote>
+<p>With PostgreSQL version 14, the database management system introduced its own built-in SQL function for population count, called <a href="https://www.postgresql.org/docs/14/functions-bitstring.html"><code>bit_count</code></a>. That was not the case in 2018, when I was conducting some research based on bitwise encodings. MySQL did have a <code>BIT_COUNT</code> function limited to 64 bits, which did not suffice for my purposes, so I implemented <a href="https://github.com/eschmar/postgres-popcount">my own extension</a> based on common algorithms for the problem. This blog post revisits said implementation and draws a performance comparison to the built-in function. This is all for curiosity, as I don’t have any real need anymore, meaning this post will not go into details.</p>
+<h2 id="what-is-popcount">What is popcount<a href="#what-is-popcount" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Population count (short popcount), or sometimes also called bit count, is a function that returns the number of bits which are set to one for a given bit sequence. A simple example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> bit_count(<span style="color:#ae81ff">5</span>::bit(<span style="color:#ae81ff">512</span>)); <span style="color:#f92672">#</span> <span style="color:#66d9ef">returns</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>This SQL command casts the decimal number 5 to a bit sequence of length 512 and counts the number of bits set to one. The number five corresponds to <code>101</code> in binary.</p>
+<p>In combination with binary operations, popcount allows to extract a lot of valuable information from bitwise encoded data. Let’s say your standard user table contains a column containing which languages that each user speaks in bit-wise encoding. Counting the number of users that speak two specific languages can be achieved with one binary AND operation and a popcount. Suddenly otherwise very costly queries becomes easily reachable and performant.</p>
+<p>Encoding data in bit sequences is rather uncommon, however, and requires some extra effort. This is definitely trading verbosity and convenience for performance. My research was specifically for scaling a matching engine to process high volumes of candidates on the fly, as a matching profile is being specified. In the end, processing 100'000 candidates added ~250ms to requests, with linear growth.</p>
+<h2 id="implementation-comparison">Implementation comparison<a href="#implementation-comparison" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The implementation details of the new <code>bit_count</code> function can be found in the PostgreSQL <a href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/port/pg_bitutils.c;hb=HEAD">git repository here</a> (or <a href="https://github.com/postgres/postgres/blob/master/src/port/pg_bitutils.c">Github Mirror</a>). It reveals that on the first call the most efficient and available implementation is detected and all future calls are rerouted directly thereafter. Interestingly, the intrinsic function for population count found in Visual Studio compilers takes precedent over using the hardware instruction <code>POPCNT</code> in assembly directly. Without hardware support, the compiler&rsquo;s intrinsic <code>__builtin_popcountl</code> function is checked. As a last resort, an 8 bit lookup table is used.</p>
+<p><a href="https://github.com/eschmar/postgresql-popcount/blob/master/popcount.c">My own implementation</a> additionally provides a Hamming Weight approach, which sits somewhere between the lookup table and the intrinsic functions performance-wise. However, it only explores the assembly instruction directly as part of an 256bit unrolled experiment. As such, I&rsquo;d expect that the new built-in function will provide comparable or slightly better performance to my own extension. Let&rsquo;s see!</p>
+<h2 id="previous-results">Previous results<a href="#previous-results" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>My benchmarking results from 2018 are as follows:</p>
+<p><img class="img-center" src="/images/revisiting-popcount-on-postgres-14/graph-2018.png" alt="Log-log-plot of the six popcount algorithms over a constant sample size of
+500000, while increasing the column length (bit alignment) by powers of two."></p>
+<p>The take-aways were that generally all provided implementations showcased linear time as the column length increased and that something seemed to happen at 2^14, for which i could not find an explanation. Details can be found in the <a href="https://github.com/eschmar/postgres-popcount">extension’s git repository</a>. Let’s see how the numbers stack up today, in 2023.</p>
+<h2 id="seeding-the-benchmark-database">Seeding the benchmark database<a href="#seeding-the-benchmark-database" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To conduct the new benchmarks, a database had to be generated and seeded with enough data. There still seems to be no built-in way in PostgreSQL to generate random values for bit types at the lengths that this benchmark requires. In general, it would be cumbersome to input bit-data directly. One way around that is to use compression. Using OpenSSL, it’s possible to generate random values in hex format:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ openssl rand -hex <span style="color:#ae81ff">8</span> <span style="color:#75715e"># 8*8=64 bits</span>
+</span></span><span style="display:flex;"><span>9e7f08f389cb4466
+</span></span></code></pre></div><p>The hex format can be cast to the target bit format:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#66d9ef">table_name</span> (<span style="color:#66d9ef">column_name</span>) <span style="color:#66d9ef">VALUES</span> (x<span style="color:#e6db74">&#39;9e7f08f389cb4466&#39;</span>::bit(<span style="color:#ae81ff">64</span>));
+</span></span></code></pre></div><p>Packaging above in a <a href="https://github.com/eschmar/postgresql-popcount/blob/master/helper/generate_db_postgres.sh">command line tool</a> provides an convenient (albeit <em>slow</em>) way for seeding large databases with randomised bitwise encodings. At larger column lengths, such as 2^17, you might find that string/pipe lengths induce a limitation on how many inserts can be done in batch operations.</p>
+<h2 id="new-benchmark-results">New benchmark results<a href="#new-benchmark-results" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The test bench was running an Intel(R) Xeon(R) Platinum 8358 CPU @ 2.60GHz (4 Hyper-Threads) on Ubuntu 22.04 and PostgreSQL 14.7.</p>
+<p><img class="img-center" src="/images/revisiting-popcount-on-postgres-14/graph-2023.png" alt="Log-log-plot of the six popcount algorithms over a constant sample size of
+500000, while increasing the column length (bit alignment) by powers of two."></p>
+<p>Above is a log-log-plot of the six popcount algorithms, as well as the new built-in <code>bit_count</code> function, over a constant sample size of
+500'000, while increasing the column length (bit alignment) by powers of two.</p>
+<p>The results confirm my expectations, however there are two interesting observations:</p>
+<ul>
+<li>Significantly reduced jump in runtime after lengths of 2^14 for the new implementation</li>
+<li>Slight degradation in performance after 2^16 for all algorithms, not seen in 2018</li>
+</ul>
+<p>It would be very interesting to talk to someone closer to postgres development, to get an explanation for the sudden increased runtime around 2^16.</p>
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Nice to see built-in support for population count in PostgreSQL, allowing to sunset my own extension. Its use is therefore only recommended for postgres versions &lt;14, when really necessary.</p>
+
+  </section>
+
+  <section class="post-meta">
+    
+      <section class="tags">
+        <ul class="tags-list">
+          
+            <li class="location"><a href="https://maps.google.com/?q=seoul-korea">Seoul, Korea</a></li>
+          
+
+          
+            <li><a href="https://eschmann.dev/tags/postgresql/">postgresql</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/postgres/">postgres</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/popcount/">popcount</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/bit_count/">bit_count</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/sql/">sql</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/benchmark/">benchmark</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/extension/">extension</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/bit/">bit</a></li>
+          
+            <li><a href="https://eschmann.dev/tags/bit-type/">bit type</a></li>
+          
+        </ul>
+      </section>
+    
+  </section>
+
+  
+  <div class="pagination-single">
+    
+      <span>&nbsp;</span>
+    
+
+    
+      <a href="https://eschmann.dev/2023/03/render-xcode-playground-animation/">
+        <span class="label">Previous post</span>
+        <span class="title">Render SwiftUI animations to mp4 in Xcode playgrounds</span>
+      </a>
+    
+  </div>
+  
+</article>
+
+    </main><footer class="footer wrap" role="contentinfo">
+  <div class="about">
+    <a href="https://twitter.com/eschmar" target="_blank" rel="noopener">
+      <img src="/marcel.jpg" alt="Marcel Eschmann" class="portrait">
+    </a>
+  </div>
+
+  <div class="copyright">
+    <span>&copy; 2016 eschmann.dev</span>
+
+    
+  </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73950662-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-73950662-1');
+    </script>
+
+    
+    
+    
+    
+    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.3d8d735e6e3388d9bb1f0a23cc3fa1cd49878d8c36402971702c2809600aa246.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+onload="renderMathInElement(document.body);"></script>
+
+  </body>
+</html>

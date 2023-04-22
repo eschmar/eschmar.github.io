@@ -2,17 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://eschmann.dev/tags/benchmark/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/bit/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/bit-type/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/bit_count/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/extension/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/popcount/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/postgres/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/postgresql/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/posts/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/2023/04/revisiting-popcount-on-postgres-14/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/sql/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://eschmann.dev/tags/</loc>
+    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://eschmann.dev/tags/animations/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://eschmann.dev/tags/circular/</loc>
-    <lastmod>2023-03-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://eschmann.dev/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -42,11 +102,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://eschmann.dev/posts/</loc>
-    <lastmod>2023-03-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://eschmann.dev/tags/programmatically/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -63,11 +118,6 @@
     <priority>0.5</priority>
   </url><url>
     <loc>https://eschmann.dev/tags/swiftui/</loc>
-    <lastmod>2023-03-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://eschmann.dev/tags/</loc>
     <lastmod>2023-03-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
