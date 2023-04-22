@@ -8,7 +8,7 @@
     <title>Revisiting popcount on Postgres 14 :: eschmann.dev</title>
 
     
-      <meta name="description" content="Revisiting popcount on PostgreSQL 14 ~ eschmann.dev">
+      <meta name="description" content="Revisiting popcount on PostgreSQL 14, to compare performance of my own extension to the built-in function. ~ eschmann.dev">
     
 
     <meta name="keywords" content="Blog,Marcel,Eschmann" />
@@ -60,13 +60,7 @@
   <h1 class="post-heading">Revisiting popcount on Postgres 14</h1>
 
   <section class="content markdown-body">
-    <!-- 
-* Rethink the blog post from the perspective of:
-	* someone with zero knowledge
-	* someone coming from the repository
-	* someone with some background knowledge.
--->
-<blockquote>
+    <blockquote>
 <p>Tl;dr: Skip to <a href="#new-benchmark-results">benchmark results</a>.</p>
 </blockquote>
 <p>With PostgreSQL version 14, the database management system introduced its own built-in SQL function for population count, called <a href="https://www.postgresql.org/docs/14/functions-bitstring.html"><code>bit_count</code></a>. That was not the case in 2018, when I was conducting some research based on bitwise encodings. MySQL did have a <code>BIT_COUNT</code> function limited to 64 bits, which did not suffice for my purposes, so I implemented <a href="https://github.com/eschmar/postgres-popcount">my own extension</a> based on common algorithms for the problem. This blog post revisits said implementation and draws a performance comparison to the built-in function. This is all for curiosity, as I don’t have any real need anymore, meaning this post will not go into details.</p>
