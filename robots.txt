@@ -1,1 +1,7 @@
 User-agent: *
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: ChatGPT
+Disallow: /
+User-agent: GPTBot
+Disallow: /
