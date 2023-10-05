@@ -73,7 +73,7 @@
 
   <section class="content markdown-body">
     <blockquote>
-<p>tldr: <a href="https://github.com/eschmar/javafx-custom-file-ext-boilerplate">Link to Boilerplate on Github</a>, see <a href="https:/dev/posts/javafx-mac-os-custom-file-type-jpackage/">the follow-up post</a>.</p>
+<p>tldr: <a href="https://github.com/eschmar/javafx-custom-file-ext-boilerplate">Link to Boilerplate on Github</a>, see <a href="/posts/javafx-mac-os-custom-file-type-jpackage/">the follow-up post</a>.</p>
 </blockquote>
 <p>I recently found myself in the position of wanting to bundle a small desktop application for interacting with a custom file type. It should recognise the file extension and be as minimal as possible, ideally acting as a thin layer on top of an existing code base. Said code base, to give some context, consists of a native c++ sdk and wrappers for mobile platforms. In this post I&rsquo;d like to address the issues I faced using JavaFX to build a desktop app bundle for MacOS, that acts as a viewer for a custom file type. We will be using OpenJDK 12, OpenJFX 12 and Gradle. The goal:</p>
 <p>In order to handle opening a file, the application somehow needs to receive a file path upon launch. Usually, this information is provided through command line arguments, however MacOS behaves differently. The operating system sends Apple system events containing the filename to the application and it is left to the developer to be ready for capturing mentioned events once they are fired. This stems from expecting multiple app instances by default, however results in somes issues for Java bundles and represents the main reason for this post.</p>
