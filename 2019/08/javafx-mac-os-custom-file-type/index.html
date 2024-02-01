@@ -22,7 +22,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@eschmar">
 
-    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Hugo 0.120.4">
 
     
     <link rel="stylesheet" href="https://eschmann.dev/sass/main.min.cef1576384123f4a35ad894ce75c895f851cf5b3cff02cb12d3450e0df3caef0.css">
@@ -80,23 +80,23 @@
 <img class="img-center" src="/images/javafx-mac-os-custom-file-type/javafx-custom-file-extension.png" width="420" alt="Boilerplate recognising .pew files.">
 <h2 id="file-handler">File handler<a href="#file-handler" class="hanchor" ariaLabel="Anchor">#</a> </h2>
 <p>An implementation to catch these system events could look as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.awt.*<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.awt.*;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Attempt listening for APP_OPEN_FILE events as soon as possible.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Desktop<span style="color:#f92672">.</span><span style="color:#a6e22e">isDesktopSupported</span><span style="color:#f92672">()</span> <span style="color:#f92672">&amp;&amp;</span> Desktop<span style="color:#f92672">.</span><span style="color:#a6e22e">getDesktop</span><span style="color:#f92672">().</span><span style="color:#a6e22e">isSupported</span><span style="color:#f92672">(</span>Desktop<span style="color:#f92672">.</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">.</span><span style="color:#a6e22e">APP_OPEN_FILE</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    Desktop<span style="color:#f92672">.</span><span style="color:#a6e22e">getDesktop</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setOpenFileHandler</span><span style="color:#f92672">(</span>event <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>File file <span style="color:#f92672">:</span> event<span style="color:#f92672">.</span><span style="color:#a6e22e">getFiles</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handle file path..
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (Desktop.<span style="color:#a6e22e">isDesktopSupported</span>() <span style="color:#f92672">&amp;&amp;</span> Desktop.<span style="color:#a6e22e">getDesktop</span>().<span style="color:#a6e22e">isSupported</span>(Desktop.<span style="color:#a6e22e">Action</span>.<span style="color:#a6e22e">APP_OPEN_FILE</span>)) {
+</span></span><span style="display:flex;"><span>    Desktop.<span style="color:#a6e22e">getDesktop</span>().<span style="color:#a6e22e">setOpenFileHandler</span>(event <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> (File file : event.<span style="color:#a6e22e">getFiles</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handle file path..</span>
+</span></span><span style="display:flex;"><span>      }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">final</span> String searchTerm <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span><span style="color:#a6e22e">getSearchTerm</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Handle search term..
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">});</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">final</span> String searchTerm <span style="color:#f92672">=</span> event.<span style="color:#a6e22e">getSearchTerm</span>();
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Handle search term..</span>
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Through the documentation of <code>setOpenFileHandler</code> we can learn that this will only work, if the Java app is a bundled MacOS application and contains a valid <code>Info.plist</code> file with a <code>CFBundleDocumentTypes</code> array present. The missing piece of information (or hint) is, that this will not work with a bash launcher script, because bash is not capable of receiving the events. This Api has gone through many iterations, from <code>com.apple.mrj</code>, to <code>com.apple.eio</code>, to <code>com.apple.eawt</code> and to <code>com.sun.glass.ui.Application</code>. These have all been deprecated in favour of the latest installment of the api: <code>java.awt.Desktop</code>. However, all versions have one thing in common: The information around them is extremely scarce or only valid for older iterations.</p>
 <p>As of Java 9, the JDK has been modularised, which allows for far lighter builds, with the JRE only containing exactly what is required for the application. Fat JARs are no more. Following the <a href="https://openjfx.io/openjfx-docs/">OpenJFX 12 documentation</a>, we end up with a packaged and lightweight JRE inside platform-specific images. However, the Java application will be launched using a shell launcher script. MacOS will send the system events to the launcher script specified in the plist file, not the actual java instance. Hence the events will never reach the code snippet above. The only remedy is creating a launcher that is capable of receiving these events and is responsible for spawning the application instances. This brings us to the actual problem space that this posts attempts to address:</p>
 <p><strong>Create a lightweight launcher that is capable of forwarding the apple system events for opening files and package it within a MacOS .app bundle.</strong> The custom file extension can be declared in the resulting <code>Info.plist</code> file, such that Finder assigns the application to the file type. Double-click on a file should spawn a new application instance.</p>
@@ -192,7 +192,7 @@
     
     
     
-    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.3d8d735e6e3388d9bb1f0a23cc3fa1cd49878d8c36402971702c2809600aa246.js"></script>
+    <script type="text/javascript" src="https://eschmann.dev/js/bundle.min.b9fab7f3db3b638e02cfb54c8db82479392dd44e4c234a23699694a7e5fdda17.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>

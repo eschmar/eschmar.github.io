@@ -6,15 +6,14 @@
     <description>Recent content in xcode on eschmann.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://eschmann.dev/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://eschmann.dev/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Render SwiftUI animations to mp4 in Xcode playgrounds</title>
       <link>https://eschmann.dev/2023/03/render-xcode-playground-animation/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/2023/03/render-xcode-playground-animation/</guid>
       <description>I&amp;rsquo;ve found it convenient to prototype SwiftUI animations in Xcode playgrounds, to quickly render custom views without getting into creating an entire project. The result is a single file that is easily shareable code-wise. Sharing the visual result however, is not as easy. There is no built-in way of capturing the rendered output. Resorting to the various screen-recording apps out there does not yield the expected quality, but also seems like a round-about way, when already working with a rendering engine directly.</description>
     </item>
-    
   </channel>
 </rss>

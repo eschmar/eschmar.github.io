@@ -6,16 +6,15 @@
     <description>Recent content in bit_count on eschmann.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://eschmann.dev/tags/bit_count/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://eschmann.dev/tags/bit_count/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Revisiting popcount on Postgres 14</title>
       <link>https://eschmann.dev/2023/04/revisiting-popcount-on-postgres-14/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/2023/04/revisiting-popcount-on-postgres-14/</guid>
       <description>Tl;dr: Skip to benchmark results.
 With PostgreSQL version 14, the database management system introduced its own built-in SQL function for population count, called bit_count. That was not the case in 2018, when I was conducting some research based on bitwise encodings. MySQL did have a BIT_COUNT function limited to 64 bits, which did not suffice for my purposes, so I implemented my own extension based on common algorithms for the problem.</description>
     </item>
-    
   </channel>
 </rss>

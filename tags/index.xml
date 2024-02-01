@@ -6,330 +6,259 @@
     <description>Recent content in Tags on eschmann.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://eschmann.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://eschmann.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>benchmark</title>
       <link>https://eschmann.dev/tags/benchmark/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/benchmark/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>bit</title>
       <link>https://eschmann.dev/tags/bit/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/bit/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>bit type</title>
       <link>https://eschmann.dev/tags/bit-type/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/bit-type/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>bit_count</title>
       <link>https://eschmann.dev/tags/bit_count/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/bit_count/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>extension</title>
       <link>https://eschmann.dev/tags/extension/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/extension/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>popcount</title>
       <link>https://eschmann.dev/tags/popcount/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/popcount/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>postgres</title>
       <link>https://eschmann.dev/tags/postgres/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/postgres/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>postgresql</title>
       <link>https://eschmann.dev/tags/postgresql/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/postgresql/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>sql</title>
       <link>https://eschmann.dev/tags/sql/</link>
       <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/sql/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>animations</title>
       <link>https://eschmann.dev/tags/animations/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/animations/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>circular</title>
       <link>https://eschmann.dev/tags/circular/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/circular/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ffmpeg</title>
       <link>https://eschmann.dev/tags/ffmpeg/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/ffmpeg/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>frame</title>
       <link>https://eschmann.dev/tags/frame/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/frame/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>gradient</title>
       <link>https://eschmann.dev/tags/gradient/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/gradient/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>path</title>
       <link>https://eschmann.dev/tags/path/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/path/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>playground</title>
       <link>https://eschmann.dev/tags/playground/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/playground/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>programmatically</title>
       <link>https://eschmann.dev/tags/programmatically/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/programmatically/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>render</title>
       <link>https://eschmann.dev/tags/render/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/render/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>swiftui</title>
       <link>https://eschmann.dev/tags/swiftui/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/swiftui/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>video</title>
       <link>https://eschmann.dev/tags/video/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/video/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>xcode</title>
       <link>https://eschmann.dev/tags/xcode/</link>
       <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/xcode/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>code</title>
       <link>https://eschmann.dev/tags/code/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/code/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>comments</title>
       <link>https://eschmann.dev/tags/comments/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/comments/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>documentation</title>
       <link>https://eschmann.dev/tags/documentation/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/documentation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>essay</title>
       <link>https://eschmann.dev/tags/essay/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/essay/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>mental model</title>
       <link>https://eschmann.dev/tags/mental-model/</link>
       <pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/mental-model/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>app-bundle</title>
       <link>https://eschmann.dev/tags/app-bundle/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/app-bundle/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>cross-platform</title>
       <link>https://eschmann.dev/tags/cross-platform/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/cross-platform/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>custom-file-type</title>
       <link>https://eschmann.dev/tags/custom-file-type/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/custom-file-type/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>file-extension</title>
       <link>https://eschmann.dev/tags/file-extension/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/file-extension/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>gradle</title>
       <link>https://eschmann.dev/tags/gradle/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/gradle/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>java</title>
       <link>https://eschmann.dev/tags/java/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/java/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>javafx</title>
       <link>https://eschmann.dev/tags/javafx/</link>
       <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/javafx/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>applescript</title>
       <link>https://eschmann.dev/tags/applescript/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/applescript/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>general</title>
       <link>https://eschmann.dev/tags/general/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/general/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>hello-world</title>
       <link>https://eschmann.dev/tags/hello-world/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://eschmann.dev/tags/hello-world/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
